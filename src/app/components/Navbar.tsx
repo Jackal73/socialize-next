@@ -13,13 +13,16 @@ const Navbar = () => {
   return (
     <div className="h-24 flex items-center justify-between">
       {/* LEFT */}
-      <div className="md:hidden lg:block w-[20%]">
+      <div className="md:hidden lg:block w-[20%] mt-3">
         {/* <Link href="/" className="font-bold text-xl text-indigo-600">
           S͛OͦCͨIͥAͣLiͥzeͤ
         </Link> */}
-        <Link href="/" className="font-bold text-xl text-amber-500">
+        <Link href="/" className="font-bold text-2xl text-amber-500">
           S͛OͦCͨIͥAͣLiͥzeͤ
         </Link>
+        {/* <Link href="/" className="font-bold text-2xl text-amber-500">
+          SOCIALize
+        </Link> */}
       </div>
       {/* CENTER */}
       <div className="hidden md:flex w-[50%] text-sm items-center justify-between">
@@ -31,12 +34,18 @@ const Navbar = () => {
               alt="Homepage"
               width={16}
               height={16}
-              className="w-4 h-3"
+              className="w-4 h-4"
             />
             <span className="">Homepage</span>
           </Link>
           <Link href="/" className="flex items-center gap-2">
-            <Image src="/friends.png" alt="Homepage" width={16} height={16} />
+            <Image
+              src="/friends.png"
+              alt="Homepage"
+              width={16}
+              height={16}
+              className="w-4 h-5"
+            />
             <span className="">Friends</span>
           </Link>
           <Link href="/" className="flex items-center gap-2">
