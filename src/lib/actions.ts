@@ -2,6 +2,7 @@
 
 import { auth } from "@clerk/nextjs/server";
 import prisma from "./client";
+import { z } from "zod";
 
 export const switchFollow = async (userId: string) => {
   const { userId: currentUserId } = auth();
@@ -141,4 +142,20 @@ export const declineFollowRequest = async (userId: string) => {
     console.log(err);
     throw new Error("Something went wrong!");
   }
+};
+
+export const updateProfile = async (formData: FormData) => {
+  const fields = Object.fromEntries(formData);
+  console.log(fields);
+
+  const Profile = z.object({
+    cover: z.string().optional(),
+    name: z.string().max(60).optional(),
+    surname: z.string().max(60).optional(),
+    description: z.string().max(255).optional(),
+    city: z.string().max(60).optional(),
+    school: z.string().max(60).optional(),
+    work: z.string().max(60).optional(),
+    website: z.string().max(60).optional(),
+  });
 };
