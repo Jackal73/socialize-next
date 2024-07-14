@@ -5,6 +5,7 @@ import { User } from "@prisma/client";
 import Image from "next/image";
 import { useActionState, useState } from "react";
 import { CldUploadWidget } from "next-cloudinary";
+import UpdateButton from "./UpdateButton";
 
 const UpdateUser = ({ user }: { user: User }) => {
   const [open, setOpen] = useState(false);
@@ -161,6 +162,7 @@ const UpdateUser = ({ user }: { user: User }) => {
                 />
               </div>
             </div>
+            <UpdateButton />
             {state.success && (
               <span className="text-green-500">Profile has been updated!</span>
             )}
