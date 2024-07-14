@@ -5,19 +5,23 @@ import { User } from "@prisma/client";
 import Image from "next/image";
 import { useActionState, useState } from "react";
 import { CldUploadWidget } from "next-cloudinary";
+import { useRouter } from "next/navigation";
 import UpdateButton from "./UpdateButton";
 
 const UpdateUser = ({ user }: { user: User }) => {
   const [open, setOpen] = useState(false);
   const [cover, setCover] = useState<any>(false);
+
   const [state, formAction] = useActionState(updateProfile, {
     success: false,
     error: false,
   });
 
+  const router = useRouter();
+
   const handleClose = () => {
     setOpen(false);
-    // state.success && router.refresh();
+    state.success && router.refresh();
   };
 
   return (
