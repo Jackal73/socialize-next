@@ -67,7 +67,9 @@ const UserInfoCard = async ({ user }: { user: User }) => {
           </span>
           <span className="text-sm">@{user.username}</span>
         </div>
-        {user.description && <p className="">{user.description}</p>}
+        {user.description && (
+          <p className="flex mt-[-12px] mb-[4px]">{user.description}</p>
+        )}
         {user.city && (
           <div className="flex items-center gap-2">
             <Image src="/map.png" alt="" width={16} height={16} className="" />
@@ -98,29 +100,26 @@ const UserInfoCard = async ({ user }: { user: User }) => {
             </span>
           </div>
         )}
-        <div className="flex items-center justify-between">
-          {user.website && (
-            <div className="flex gap-1 items-center">
-              <Image
-                src="/link.png"
-                alt=""
-                width={16}
-                height={16}
-                className=""
-              />
-              <Link
-                href="https://lynkx.vercel.app/Jackal73"
-                className="text-blue-500 font-medium"
-              >
-                {user.website}
-              </Link>
-            </div>
-          )}
+        {/* <div className="flex items-center justify-between"> */}
+        {user.website && (
           <div className="flex gap-1 items-center">
-            <Image src="/date.png" alt="" width={16} height={16} className="" />
-            <span className="">Joined {formattedDate}</span>
+            <Image src="/link.png" alt="" width={16} height={16} className="" />
+            <Link
+              // href="https://lynkx.vercel.app/Jackal73"
+              href={user.website}
+              className="text-blue-500 font-medium"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {user.website}
+            </Link>
           </div>
+        )}
+        <div className="flex gap-1 items-center justify-end">
+          <Image src="/date.png" alt="" width={16} height={16} className="" />
+          <span className="">Joined {formattedDate}</span>
         </div>
+        {/* </div> */}
         {currentUserId && currentUserId !== user.id && (
           <UserInfoCardInteraction
             userId={user.id}
