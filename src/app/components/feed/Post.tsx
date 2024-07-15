@@ -1,20 +1,29 @@
 import Image from "next/image";
 import Comments from "./Comments";
+import { Post as PostType, User } from "@prisma/client";
 
-const Post = () => {
+type FeedPostType = PostType & { user: User } & {
+  likes: [{ userId: string }] & { _count: { comments: number } };
+};
+
+const Post = ({ post }: { post: FeedPostType }) => {
   return (
     <div className="flex flex-col gap-4">
       {/* USER */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
           <Image
-            src="https://images.pexels.com/photos/17836854/pexels-photo-17836854/free-photo-of-young-white-goat.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load"
+            src={post.user.avatar || "/noAvatar.png"}
             alt=""
             width={40}
             height={40}
             className="w-10 h-10 rounded-full"
           />
-          <span className="font-medium">Jake Radester</span>
+          <span className="font-medium">
+            {post.user.name && post.user.surname
+              ? post.user.name + " " + post.user.surname
+              : post.user.username}
+          </span>
         </div>
         <Image
           src="/more.png"
@@ -26,20 +35,17 @@ const Post = () => {
       </div>
       {/* DESCRIPTION */}
       <div className="flex flex-col gap-4">
-        <div className="w-full min-h-96 relative">
-          <Image
-            src="https://images.pexels.com/photos/20782542/pexels-photo-20782542/free-photo-of-green-village-landscape-in-countryside.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load"
-            alt=""
-            fill
-            className="object-cover rounded-md"
-          />
-        </div>
-        <p className="">
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet, a
-          under nobel nematode ad quia antique hero officia facer voluptate
-          alias labor sam debit is obcaecati. Possum ut dolor amet corporate
-          antique?
-        </p>
+        {post.img && (
+          <div className="w-full min-h-96 relative">
+            <Image
+              src={post.img}
+              alt=""
+              fill
+              className="object-cover rounded-md"
+            />
+          </div>
+        )}
+        <p className="">{post.desc}</p>
       </div>
       {/* INTERACTION */}
       <div className="flex items-center justify-between text-sm my-4">
@@ -82,7 +88,7 @@ const Post = () => {
             />
             <span className="text-gray-300">|</span>
             <span className="text-gray-500">
-              17<span className="hidden md:inline"> Shares</span>
+              <span className="hidden md:inline"> Share</span>
             </span>
           </div>
         </div>
