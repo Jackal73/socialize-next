@@ -1,5 +1,6 @@
 "use client";
 
+import { addComment } from "@/lib/actions";
 import { useUser } from "@clerk/nextjs";
 import { Comment, User } from "@prisma/client";
 import Image from "next/image";
@@ -18,6 +19,37 @@ const CommentList = ({
   const [commentState, setCommentState] = useState(comments);
   const [desc, setDesc] = useState("");
 
+  const add = async () => {
+    if (!user || !desc) return;
+
+    addOptimisticComment({
+      id: Math.random(),
+      desc,
+      createdAt: new Date(Date.now()),
+      updatedAt: new Date(Date.now()),
+      userId: user.id,
+      postId: postId,
+      user: {
+        id: user.id,
+        username: "Sending... Please wait",
+        avatar: user.imageUrl || "/noAvatar.png",
+        cover: "",
+        description: "",
+        name: "",
+        surname: "",
+        city: "",
+        work: "",
+        school: "",
+        website: "",
+        createdAt: new Date(Date.now()),
+      },
+    });
+    try {
+      const createdComment = await addComment(postId, desc);
+      setCommentState((prev) => [createdComment, ...prev]);
+    } catch (err) {}
+  };
+
   const [optimisticComments, addOptimisticComment] = useOptimistic(
     commentState,
     (state, value: CommentWithUser) => [value, ...state]
@@ -35,7 +67,7 @@ const CommentList = ({
             className="w-7 h-7 rounded-full"
           />
           <form
-            action=""
+            action={add}
             className="flex-1 flex items-center justify-between bg-slate-100 rounded-xl text-sm px-6 py-2 w-full"
           >
             <input
@@ -66,9 +98,9 @@ const CommentList = ({
             <Image
               src={comment.user.avatar || "/noAvatar.png"}
               alt=""
-              width={28}
-              height={28}
-              className="w-7 h-7 rounded-full"
+              width={24}
+              height={24}
+              className="w-6 h-6 rounded-full"
             />
             {/* DESCRIPTION */}
             <div className="flex flex-col gap-2 flex-1 text-sm">

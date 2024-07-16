@@ -55,7 +55,7 @@ const Post = ({ post }: { post: FeedPostType }) => {
         commentNumber={post._count.comments}
       />
 
-      <Comments />
+      <Comments postId={post.id} />
     </div>
   );
 };
