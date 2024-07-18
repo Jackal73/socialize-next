@@ -82,7 +82,10 @@ const AddPost = () => {
           >
             {({ open }) => {
               return (
-                <div className="flex items-center gap-2 cursor-pointer">
+                <div
+                  className="flex items-center gap-2 cursor-pointer"
+                  onClick={() => open()}
+                >
                   <Image
                     src="/addImage.png"
                     alt=""
