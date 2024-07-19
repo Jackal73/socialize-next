@@ -1,6 +1,5 @@
 import prisma from "@/lib/client";
 import { auth } from "@clerk/nextjs/server";
-import Image from "next/image";
 import StoryList from "./StoryList";
 
 const Stories = async () => {
@@ -18,7 +17,7 @@ const Stories = async () => {
           user: {
             followers: {
               some: {
-                followerId: currentUserId,
+                // followerId: currentUserId,
               },
             },
           },
