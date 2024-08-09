@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Navbar from "./components/Navbar";
+import Navbar from "../components/Navbar";
 import { ClerkProvider } from "@clerk/nextjs";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -10,7 +10,6 @@ export const metadata: Metadata = {
   icons: "/beach_.ico",
   // title: "S͛OͦCͨIͥAͣLiͥzeͤ",
   title: "SOCIALize",
-
   description: "Social media built with Next.js",
 };
 
