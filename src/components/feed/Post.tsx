@@ -41,7 +41,8 @@ const Post = ({ post }: { post: FeedPostType }) => {
               src={post.img}
               alt=""
               fill
-              className="object-cover rounded-md"
+              className="object-contain
+               rounded-md"
             />
           </div>
         )}
